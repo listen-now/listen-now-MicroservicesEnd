@@ -19,7 +19,7 @@ echo '                                                                          
 printf "${NORMAL}"
 
 echo Install docker-ce.
-wget https://github.com/import-yuefeng/ShadowsocksDocker/blob/master/installDocker.sh
+wget https://raw.githubusercontent.com/import-yuefeng/ShadowsocksDocker/master/installDocker.sh
 chmod +x installDocker.sh
 source ./installDocker.sh
 
