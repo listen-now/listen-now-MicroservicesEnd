@@ -36,9 +36,9 @@ echo Ready deploy listen-now-End.
 docker run -d --name="redis.app" catone/listen-now-redis:0.0.1
 docker run -d --name="mongodb.app" catone/listen-now-mongodb:0.0.1
 
-docker run -d -P --name="uwsgi.app" --link redis.app --link mongodb.app catone/listen-now-uwsgi-python3:0.0.1
+docker run -d --name="uwsgi.app" --link redis.app --link mongodb.app catone/listen-now-uwsgi-python3:0.0.1
 
-docker run -d -P --name="nginx.app" --link uwsgi.app catone/listen-now-nginx:0.0.1
+docker run -d -p 80:80 --name="nginx.app" --link uwsgi.app catone/listen-now-nginx:0.0.1
 
 echo Deploy success.
 echo Beybey.
