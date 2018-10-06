@@ -1,0 +1,18 @@
+FROM ubuntu:16.04
+MAINTAINER Cat.1 "zhuyuefeng0@gmail.com"
+
+RUN apt-get update
+RUN apt-get install -y nginx
+
+RUN mkdir -p /var/log/listen-now/
+RUN touch /var/log/listen-now/access.log
+RUN touch /var/log/listen-now/error.log
+
+ADD ./nginx_conf.conf /etc/nginx/
+ADD ./2_www.zlclclc.cn.key /etc/nginx
+ADD ./1_www.zlclclc.cn_bundle.crt /etc/nginx
+
+CMD nginx -c /etc/nginx/nginx_conf.conf -g 'daemon off;'
+
+EXPOSE 80
+

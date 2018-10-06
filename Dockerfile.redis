@@ -1,0 +1,12 @@
+FROM ubuntu:16.04
+MAINTAINER Cat.1 "zhuyuefeng0@gmail.com"
+
+RUN groupadd -r redis && useradd -r -g redis redis
+
+RUN apt-get update
+RUN apt-get install -y redis-server
+
+EXPOSE 6379
+
+CMD ["redis-server"]
+

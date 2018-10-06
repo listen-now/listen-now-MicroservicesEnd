@@ -1,0 +1,32 @@
+FROM ubuntu:16.04
+MAINTAINER Cat.1 "zhuyuefeng0@gmail.com"
+
+RUN apt-get update
+RUN apt-get install -y python3-pip
+RUN apt-get install -y python3 python-dev python3-dev \
+     build-essential libssl-dev libffi-dev \
+     libxml2-dev libxslt1-dev zlib1g-dev
+
+RUN mkdir -p /var/log/listen-now
+RUN touch /var/log/listen-now.log
+
+ADD ./listen-now /usr/local/listen-now/
+
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r /usr/local/listen-now/requirements.txt
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple uwsgi
+
+RUN apt-get install -y locales
+RUN locale-gen zh_CN
+RUN locale-gen zh_CN.utf8
+RUN locale-gen zh_CN.UTF-8  
+ENV LANG zh_CN.UTF-8
+ENV LANGUAGE zh_CN.UTF-8
+ENV LC_ALL zh_CN.UTF-8
+ENV PYTHONIOENCODING=utf-8
+
+
+CMD uwsgi --emperor /usr/local/listen-now/
+
+
+EXPOSE 5051
+
